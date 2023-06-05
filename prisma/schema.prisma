@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Sala {
+  id         String    @id @default(uuid())
+  disponivel Boolean   @default(true)
+  horarioId  String?   @unique
+  Horario    Horario[]
+}
+
+model Horario {
+  id              String   @id @default(uuid())
+  data            DateTime
+  disponibilidade Boolean
+  sala            Sala?    @relation(fields: [salaId], references: [id])
+  salaId          String?
+  cliente         Cliente? @relation(fields: [clienteId], references: [id])
+  clienteId       String?
+}
+
+model Cliente {
+  id       String    @id @default(uuid())
+  nome     String
+  email    String
+  senha    String
+  horarios Horario[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
