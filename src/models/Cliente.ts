@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient, Cliente } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import { hash } from 'bcryptjs';
+
 
 const prisma = new PrismaClient();
 
@@ -14,10 +15,10 @@ export async function listarClientes(): Promise<Cliente[]>{
 
 export async function criar(data: Prisma.ClienteCreateInput): Promise<Cliente> {
   const senha = data.senha;
-  const saltRounds = 10;
+  
 
 
-  const senhaHash = await bcrypt.hash(senha, saltRounds);
+  const senhaHash = await hash(senha, 8);
 
   const dataComSenhaHash: Prisma.ClienteCreateInput = {
     ...data,
