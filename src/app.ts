@@ -3,6 +3,7 @@ import cors from 'cors';
 import horarioRoutes from './routes/horarioRouters';
 import clienteRoutes from './routes/clienteRouters';
 import salaRoutes from './routes/salaRouters';
+import sessaoRoutes from './routes/sessaoRouter';
 import * as dotenv from 'dotenv';
 
 
@@ -23,6 +24,7 @@ app.use(cors({
 app.use(salaRoutes);
 app.use(horarioRoutes);
 app.use(clienteRoutes);
+app.use(sessaoRoutes);
 
 
 app.listen(3000, () => {
