@@ -13,7 +13,7 @@ export async function login(req: Request, res: Response) {
     // Verificar se o cliente existe e a senha está correta
     if (cliente && await compare(senha, cliente.senha)) {
       // Login bem-sucedido
-      res.status(200).json({ message: 'Login bem-sucedido' });
+      res.status(200).json({ cliente });
     } else {
       // Credenciais inválidas
       res.status(401).json({ message: 'Credenciais inválidas' });
